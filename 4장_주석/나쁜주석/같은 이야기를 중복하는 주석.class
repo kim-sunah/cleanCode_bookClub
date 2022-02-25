@@ -1,0 +1,66 @@
+// this.closed가 true일 때 유틸리티 메서드다.
+// 타임아웃에 도달하면 예외를 던진다.
+public synchronized void waitForClose(final long timeoutMillis)throws Exception{
+	if(!closed){
+		wait(timeoutMillis);
+		if(!closed)
+			throw new Exception("MockResponseSender could not be closed");
+	}
+}
+
+public abstract class ContainerBase implements Container, Lifecycle, Pipeline, MBanRegistration, Serializable{
+	/**
+	* 이 컴포넌트의 프로세서 지연값
+	*/
+	protected int backgroundProcessorDelay = -1;
+	/**
+	* 이 컴포턴트를 지원하기 위한 생명주기 이벤트
+	*/
+	protectedLifecycleSupport lifecycle = new LifecycleSupper(this);
+	/**
+	* 이 컴포넌트를 위한 컨테이너 이벤트 Listner
+	*/
+	protected ArrayList Listeners = new ArrayList();
+	/**
+	* 컨테이너와 관련된 Loader 구현
+	*/
+    protected Loader loader = null;
+    /**
+     * 컨테이너와 관련된 logger 이름
+     */
+    protected String logName = null;
+    /**
+     * 컨테이너와 관련된 Manager 이름
+     */
+    protected String manager = null;
+    /**
+     * 컨테이너와 관련된 Cluster
+     */
+    protected Sluster cluster = null
+    /**
+     * 사람이 읽을 수 있는 컨테이너 이름
+     */
+    protected String name = null;
+    /**
+     * 컨테이너의 부모 컨테이너
+     */
+    protected Container parent = null;
+    /**
+     * Loader를 설치할 때 구성이 끝나야 할 어버이 클래스 로더
+     */
+    protected ClassLoader parentClassLoader = null
+    /**
+     * 컨테이너와 관련된 Pipeline 객체
+     */
+    protected Pipeline pipeline = new StandardPipeline(this);
+    /**
+     * 컨테이너와 관련된 Realm
+     */
+    protected Realm realm = null;
+    /**
+     * 컨테이너와 관련된 DirContect 객체 
+     */        
+    protected DirContext resources = null;
+    
+    
+}

@@ -1,0 +1,14 @@
+/**
+ * 나쁜예시
+*/
+
+//테스트중인 Responder 인스턴스를 반환한다.
+protected abstract Responder responderInstance();
+
+
+/**
+ * 수정
+ */
+
+ // kk:mm:ss EEE, MMM dd, yyyy형식이다.
+ Pattern timeMatcher = Pattern.compile("\\d*:\\d*:\\d*\\w*\\d*, \\d*");

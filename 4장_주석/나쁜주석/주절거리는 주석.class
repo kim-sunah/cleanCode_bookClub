@@ -1,0 +1,11 @@
+public void loadProperties(){
+    try{
+        String propertiesPath = propertiesLocation + "/" + PROPERTIES_FILE;
+        FileInputStream propertiesStream = new FileInputStream(propertiesPath);
+        loadedProperties.load(propertiesStream);
+    }catch(IOException e){
+        //속성 파일이 없다면 기본값을 모두 메모리로 읽어들였다는 의미다.
+    }
+}
+
+

@@ -1,0 +1,8 @@
+/**
+ * 적합성 테스트가 동작하는 포트 : 기본값은 <b>8082</b>
+ * 
+ * @param fitenessePort
+ */
+public void setFitnessePort(int fitnessePort){
+    this.fitnessePort = fitnessePort;
+}

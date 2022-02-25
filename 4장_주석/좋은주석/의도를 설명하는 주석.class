@@ -1,0 +1,36 @@
+/**
+ * 나쁜예시
+*/
+
+public int compareTo(Object o ){
+    if(o instanceof WikiPagePath){
+        WikiPagePath p = (WikiPagePath) o;
+        String compressedName = StringUtil.join(names,"");
+        String compressedArgumentName = StringUtil.join(p.names,"");
+        return compressedName.compareTo(compressedArgumenName);
+    }
+    return 1; //오른쪽 유형이므로 정렬 순위가 더 높다.
+}
+
+
+/**
+ * 수정
+ */
+
+public void testConcurrentAddWidgets() throws Exception{
+	WidgetBuilder widgetBuilder = new WidgeBuilder(new Class[]{BoldWidget.class});
+	String text = "''bold text''";
+	parenWidget parent = new BoldWidget(new MockWidgetRoot(), "''bold text''");
+	AtomicBoolean failFlag = new AtomicBoolean();
+	failFlag.set(false);
+
+	//스레드를 대량 생성하는 방법으로 어떻게든 경쟁 조건을 만들려 시도한다.
+	for(int i = 0; i<25000; i++){
+		WidgetBuilderThread widgetBuilderThread = new WidgetBuilderThread(widgetBuilder, text, parent, failFlag);
+		Thread thread = new Thread(widgetBuilderThread);
+		thread.start();
+	}
+	asserEquals(false, failFlag.get());
+}
+
+ 
