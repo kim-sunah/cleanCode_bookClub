@@ -1,3 +1,4 @@
+//직교좌표계 사용
 public class Point{
     public double x;
     public double y;
