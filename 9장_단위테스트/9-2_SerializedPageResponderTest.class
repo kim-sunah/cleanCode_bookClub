@@ -1,0 +1,36 @@
+//테스트 자료를 만든다.
+public void testGetPageHierarchyAsXml() throws Exception {
+    makePages("PageOne", "PageOne.ChildOne", "PageTwo");
+
+    submitRequest("root", "type:pages");
+
+    assertResponseIsXML();
+    assertResponseContains(
+        "<name>PageOne</name>", "<name>PageTwo</name>", "<name>ChildOne</name>"
+    );
+}
+
+//테스트 자료를 조작한다.
+public void testSymbolicLinksAreNotInXmlPageHierarchy() throws Exception {
+    WikiPage page = makePage("PageOne");
+    makePages("PageOne.ChildOne", "PageTwo");
+
+    addLinkTo(page, "PageTwo", "SymPage");
+
+    submitRequest("root", "type:pages");
+
+    assertResponseIsXML();
+    assertResponseContains(
+        "<name>PageOne</name>","<name>PageTwo</name>", "<name>ChildOne</name>"
+    );
+    assertResponseDoesNotContain("SymPage");
+}
+
+//조작한 결과가 올바른지 확인한다.
+public void testGetDataAsXml() throws Exception {
+    makePageWithContent("TestPageOne", "test page");
+    submitRequest("TestPageOne", "type:data");
+
+    assertResponseIsXML();
+    assertResponseContains("test page", "<Test");
+}

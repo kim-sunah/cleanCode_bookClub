@@ -1,0 +1,21 @@
+@Test  
+    public void turnOnCollerAndBlowerIfTooHot() throws Exception {
+        tooHot();
+        assertEquals("hBchl", hw.getState());
+    }
+
+    @Testpublic void turnOnHeaterAndBlowerIfTooCold() throws Exception {
+        tooCold();
+        assertEquals("HBchl", hw.getState());
+    }
+
+    @Test
+    public void turnOnHiTempAlarmAtThreshold() throws Exception {
+        wayTooHot();
+        assertEquals("hBHl", hw.getState());
+    }
+
+    @Testpublic void turnOnLoTempAlarmAtThreshold() throws Exception {
+        wayTooCold();
+        assertEquals("HBchL", hw.getState());
+    }
