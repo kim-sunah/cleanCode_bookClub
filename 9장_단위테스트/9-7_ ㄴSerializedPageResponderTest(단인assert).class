@@ -1,0 +1,16 @@
+public void testGetPageHierarchyAsXml() throws Exception {
+    givenPages("PageOne", "PageOne.ChildOne", "pageTwo");
+    whenRequestIsIssued("root", "type:pages");
+
+    thenResponseShouldBeXML();
+}
+
+public void testGetPageHierarchyHasRightTage() throws Exception {
+    givenPages("PageOne", "PageOne.ChildOne", "PageTwo");
+
+    whenRequestIsIssued("root", "type:pages");
+
+    thenResponseShouldContain(
+        "<name>PageOne</name>", "<name>PageTwo</name>","<name>ChildOne</name>"
+    );
+}
